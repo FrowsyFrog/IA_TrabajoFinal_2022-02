@@ -3,7 +3,7 @@ import cv2 as cv
 import numpy as np
 import base64
 import io, sys
-import poseEstimation as pe
+import scripts.poseEstimation as pe
 from PIL import Image
 
 app = Flask(__name__)
