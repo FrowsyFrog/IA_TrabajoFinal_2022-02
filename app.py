@@ -22,10 +22,13 @@ def process():
     img = pe.crop_image(img)
     img = pe.resize_image(img, 28,28)
 
-    text = pp.prediction(img)
+
 
     # Return image ---
     img = Image.fromarray(img)
+
+    text = pp.prediction(img)
+
     rawBytes = io.BytesIO()
     img.save(rawBytes, "PNG")
     rawBytes.seek(0)
