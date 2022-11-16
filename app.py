@@ -22,8 +22,6 @@ def process():
     img = pe.crop_image(img)
     img = pe.resize_image(img, 28,28)
 
-
-
     # Return image ---
     img = Image.fromarray(img)
 

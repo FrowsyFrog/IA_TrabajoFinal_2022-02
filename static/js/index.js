@@ -1,7 +1,7 @@
 window.onload = () => {
 	$('#sendbutton').click(() => {
 		imagebox = $('#imagebox')
-		prediction = $('#prediction')
+		const prediction = document.getElementById('prediction'); 
 		prediction.textContent = 'Procesando...';
 		input = $('#imageinput')[0]
         console.log(input.files[0])
@@ -27,6 +27,7 @@ window.onload = () => {
 					imagebox.attr('src' , 'data:image/png;base64,'+image);
 					imagebox.height(280);
 					imagebox.width(280);
+					console.log(data['text']);
 					prediction.textContent = data['text'];
 				}
 			});
