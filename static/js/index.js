@@ -1,6 +1,8 @@
 window.onload = () => {
 	$('#sendbutton').click(() => {
 		imagebox = $('#imagebox')
+		prediction = $('#prediction')
+		prediction.textContent = 'Procesando...';
 		input = $('#imageinput')[0]
         console.log(input.files[0])
 		if(input.files && input.files[0])
@@ -20,11 +22,12 @@ window.onload = () => {
 					console.log(data.getAllResponseHeaders());
 				},
 				success: function(data){
-					bytestring = data['status']
-					image = bytestring.split('\'')[1]
-					imagebox.attr('src' , 'data:image/png;base64,'+image)
+					bytestring = data['status'];
+					image = bytestring.split('\'')[1];
+					imagebox.attr('src' , 'data:image/png;base64,'+image);
 					imagebox.height(280);
 					imagebox.width(280);
+					prediction.textContent = data['text'];
 				}
 			});
 		}

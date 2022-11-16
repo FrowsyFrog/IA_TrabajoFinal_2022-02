@@ -4,6 +4,7 @@ import numpy as np
 import base64
 import io, sys
 import scripts.poseEstimation as pe
+import scripts.posePrediction as pp
 from PIL import Image
 
 app = Flask(__name__)
@@ -21,13 +22,15 @@ def process():
     img = pe.crop_image(img)
     img = pe.resize_image(img, 28,28)
 
+    text = pp.prediction(img)
+
     # Return image ---
     img = Image.fromarray(img)
     rawBytes = io.BytesIO()
     img.save(rawBytes, "PNG")
     rawBytes.seek(0)
     img_base64 = base64.b64encode(rawBytes.read())
-    return jsonify({'status':str(img_base64)})
+    return jsonify({'status':str(img_base64),'text':str(text)})
 
 @app.after_request
 def after_request(response):
