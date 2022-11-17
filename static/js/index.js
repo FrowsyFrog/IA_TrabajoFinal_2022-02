@@ -2,14 +2,15 @@ window.onload = () => {
 	$('#sendbutton').click(() => {
 		imagebox = $('#imagebox')
 		const prediction = document.getElementById('prediction'); 
+		const output = document.getElementById('output');
 		prediction.textContent = 'Procesando...';
 		input = $('#imageinput')[0]
-        console.log(input.files[0])
 		if(input.files && input.files[0])
 		{
 			let formData = new FormData();
 			formData.append('image' , input.files[0]);
-			console.log(formData);
+			formData.append('thickness', output.textContent);
+			console.log(output.textContent);
 			$.ajax({
 				url: "http://localhost:5000/processing", // fix this to your liking
 				type:"POST",
@@ -34,6 +35,11 @@ window.onload = () => {
 		}
 	});
 };
+
+function onRangeChange(range){
+	const output = document.getElementById('output');
+	output.textContent = range.value;
+}
 
 function readUrl(input){
     imagebox = $('#imagebox')

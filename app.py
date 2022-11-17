@@ -12,12 +12,14 @@ app = Flask(__name__)
 @app.route("/processing", methods=["POST"])
 def process():
     # Get image ---
+
     file = request.files['image'].read() ## byte file
+    tck = int(request.values['thickness'])
     npimg = np.fromstring(file, np.uint8)
     img = cv.imdecode(npimg,cv.IMREAD_COLOR)
 
     # Process image ---
-    img = pe.pose_estimation(img, thickness=10)
+    img = pe.pose_estimation(img, thickness=tck)
     img = pe.resize_image(img, 150, 200)
     img = pe.crop_image(img)
     img = pe.resize_image(img, 28,28)

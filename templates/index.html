@@ -15,6 +15,10 @@
         <input id="imageinput" type="file" name="image" onchange="readUrl(this)">
         <button name="send" id="sendbutton">Enviar</button>
         <hr>
+        <div class="slidecontainer">
+            <div>Grosor de esqueleto: <div id="output">20</div></div>
+            <input type="range" min="1" max="40" value="20" class="slider" id="myRange" oninput="onRangeChange(this)">
+        </div>
         <div class="prediction" id="prediction"></div>
         <img id="imagebox" src="">
     </div>
