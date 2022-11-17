@@ -15,11 +15,12 @@ def process():
 
     file = request.files['image'].read() ## byte file
     tck = int(request.values['thickness'])
+    thr = float(request.values['thr'])
     npimg = np.fromstring(file, np.uint8)
     img = cv.imdecode(npimg,cv.IMREAD_COLOR)
 
     # Process image ---
-    img = pe.pose_estimation(img, thickness=tck)
+    img = pe.pose_estimation(img, tck, thr)
     img = pe.resize_image(img, 150, 200)
     img = pe.crop_image(img)
     img = pe.resize_image(img, 28,28)

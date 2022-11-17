@@ -5,7 +5,6 @@ net = cv.dnn.readNetFromTensorflow("static/graph_opt.pb")
 
 inWidth = 300
 inHeight = 400
-thr = 0.1
 
 BODY_PARTS = { "Nose": 0, "Neck": 1, "RShoulder": 2, "RElbow": 3, "RWrist": 4,
                "LShoulder": 5, "LElbow": 6, "LWrist": 7, "RHip": 8, "RKnee": 9,
@@ -17,7 +16,7 @@ BODY_PARTS = { "Nose": 0, "Neck": 1, "RShoulder": 2, "RElbow": 3, "RWrist": 4,
 POSE_PAIRS = [ ["Neck", "RShoulder"], ["Neck", "LShoulder"], ["RShoulder", "RElbow"],
                ["RElbow", "RWrist"], ["LShoulder", "LElbow"], ["LElbow", "LWrist"], ["Neck", "Nose"]]
 
-def pose_estimation(frame, thickness = 25):
+def pose_estimation(frame, thickness, threshold):
     frameWidth = frame.shape[1]
     frameHeight = frame.shape[0]
     
@@ -40,7 +39,7 @@ def pose_estimation(frame, thickness = 25):
         x = (frameWidth * point[0]) / out.shape[3]
         y = (frameHeight * point[1]) / out.shape[2]
         # Add a point if it's confidence is higher than threshold.
-        points.append((int(x), int(y)) if conf > thr else None)
+        points.append((int(x), int(y)) if conf > threshold else None)
 
     for pair in POSE_PAIRS:
         partFrom = pair[0]

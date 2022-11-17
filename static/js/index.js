@@ -3,6 +3,7 @@ window.onload = () => {
 		imagebox = $('#imagebox')
 		const prediction = document.getElementById('prediction'); 
 		const output = document.getElementById('output');
+		const oThr = document.getElementById('oThr')
 		prediction.textContent = 'Procesando...';
 		input = $('#imageinput')[0]
 		if(input.files && input.files[0])
@@ -10,6 +11,7 @@ window.onload = () => {
 			let formData = new FormData();
 			formData.append('image' , input.files[0]);
 			formData.append('thickness', output.textContent);
+			formData.append('thr', oThr.textContent);
 			console.log(output.textContent);
 			$.ajax({
 				url: "http://localhost:5000/processing", // fix this to your liking
@@ -38,6 +40,11 @@ window.onload = () => {
 
 function onRangeChange(range){
 	const output = document.getElementById('output');
+	output.textContent = range.value;
+}
+
+function onThRangeChange(range){
+	const output = document.getElementById('oThr');
 	output.textContent = range.value;
 }
 
