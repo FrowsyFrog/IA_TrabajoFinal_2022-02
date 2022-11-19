@@ -1,6 +1,6 @@
 window.onload = () => {
 	$('#sendbutton').click(() => {
-		imagebox = $('#imagebox')
+		imagebox = $('#resultimage')
 		const prediction = document.getElementById('prediction'); 
 		const output = document.getElementById('output');
 		const oThr = document.getElementById('oThr')
@@ -27,6 +27,7 @@ window.onload = () => {
 				success: function(data){
 					bytestring = data['status'];
 					image = bytestring.split('\'')[1];
+					changeOutputVisibility('visible');
 					imagebox.attr('src' , 'data:image/png;base64,'+image);
 					imagebox.height(280);
 					imagebox.width(280);
@@ -37,6 +38,15 @@ window.onload = () => {
 		}
 	});
 };
+
+function changeOutputVisibility(visible){
+	resultimage = document.getElementById('resultimage');
+	resultimage.style.visibility = visible;
+	if(visible == 'hidden'){
+		resultimage.style.height = 0;
+		resultimage.style.width = 0;
+	}
+}
 
 function onRangeChange(range){
 	const output = document.getElementById('output');
@@ -49,14 +59,12 @@ function onThRangeChange(range){
 }
 
 function readUrl(input){
-    imagebox = $('#imagebox')
-    console.log("evoked readUrl")
+    imagebox = $('#imagebox');
 
     if(input.files && input.files[0]){
 		let reader = new FileReader();
 		reader.onload = function(e){
-			console.log(e)
-			
+			changeOutputVisibility('hidden')
 			imagebox.attr('src',e.target.result); 
 			imagebox.height(e.height);
 			imagebox.width(e.width);

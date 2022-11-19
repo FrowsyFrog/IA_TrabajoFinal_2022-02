@@ -21,17 +21,25 @@ def process():
 
     # Process image ---
     img = pe.pose_estimation(img, tck, thr)
+    print("pose si")
     img = pe.resize_image(img, 150, 200)
     img = pe.crop_image(img)
-    img = pe.resize_image(img, 28,28)
+    text = "Error..."
+
+    if img.shape == (0,0):
+        img = Image.open("static/img/error.png")
+    else:
+        img = pe.resize_image(img, 28,28)
+        img = Image.fromarray(img)
+        text = pp.prediction(img)
 
     # Return image ---
-    img = Image.fromarray(img)
 
-    text = pp.prediction(img)
+    print("predict si")
 
     rawBytes = io.BytesIO()
     img.save(rawBytes, "PNG")
+    print("save si")
     rawBytes.seek(0)
     img_base64 = base64.b64encode(rawBytes.read())
     return jsonify({'status':str(img_base64),'text':str(text)})
