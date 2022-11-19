@@ -1,6 +1,53 @@
+h1 {
+  text-align: center;
+}
+h2 {
+  text-align: center;
+}
+p {
+  font-size: 16px;
+  text-align: center;
+}
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #444;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #444;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.input-form {
+  visibility: hidden;
+}
+
+.separator {
+  margin-bottom: 5px;
+  height: 1px;
+  width: 100%;
+  background-color: gray;
+}
+
+.btn-success {
+  margin: 10px;
+}
+
+.btn-primary {
+  margin: 10px;
+}
+
+.slidecontainer {
+  margin: 10px;
+}
